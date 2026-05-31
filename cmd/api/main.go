@@ -5,11 +5,15 @@ import (
 	"net/http"
 
 	"go-api-starter/internal/config"
+	"go-api-starter/internal/database"
 	"go-api-starter/internal/modules/items"
 )
 
 func main() {
 	cfg := config.Load()
+
+	db := database.Connect(cfg)
+	defer db.Close()
 
 	mux := http.NewServeMux()
 
