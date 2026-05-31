@@ -1,26 +1,180 @@
 # Roadmap
 
-## Fase 1 — Base
-[x] CRUD
-[x] Modularização
-[x] Response Package
-[x] Configuração .env
+## Visão Geral
 
-## Fase 2 — Ambiente
-[ ] Docker
-[ ] PostgreSQL
-[ ] Docker Compose
+O Go API Starter é um template reutilizável para desenvolvimento de APIs REST em Go.
 
-## Fase 3 — Persistência
-[ ] Tabela items
-[ ] Repository PostgreSQL
-[ ] Migrations
+Objetivos:
 
-## Fase 4 — Segurança
-[ ] Users
-[ ] JWT
-[ ] Middleware Auth
+* Aprender Go de forma prática
+* Criar uma arquitetura reutilizável
+* Reduzir o tempo de criação de novos projetos
+* Evoluir para um starter pronto para produção
 
-## Fase 5 — Reutilização
-[ ] Module Generator
-[ ] CLI de scaffolding
+---
+
+# Versão Atual
+
+## v0.1.0 — Starter em Memória ✅
+
+Status: Concluído
+
+### Funcionalidades
+
+* [x] Estrutura inicial do projeto
+* [x] CRUD Items
+* [x] Handler Layer
+* [x] Service Layer
+* [x] Repository Layer
+* [x] Response Package
+* [x] Configuração via .env
+* [x] GitHub
+* [x] Documentação inicial
+
+### Resultado
+
+Primeira versão funcional da arquitetura.
+
+---
+
+# v0.2.0 — Persistência Real
+
+Status: Em andamento
+
+### Ambiente
+
+* [ ] Docker Desktop
+* [ ] Docker Compose
+* [ ] PostgreSQL Container
+
+### Backend
+
+* [ ] Conexão PostgreSQL
+* [ ] Health Check do Banco
+* [ ] Repository PostgreSQL
+* [ ] Remoção do armazenamento em memória
+
+### Dados
+
+* [ ] Tabela Items
+* [ ] CRUD persistente
+
+### Documentação
+
+* [ ] Guia Docker
+* [ ] Guia PostgreSQL
+
+### Resultado Esperado
+
+Dados persistidos em banco de dados.
+
+---
+
+# v0.3.0 — Migrations e Qualidade
+
+Status: Planejado
+
+### Banco
+
+* [ ] Sistema de Migrations
+* [ ] Seed de dados
+
+### Qualidade
+
+* [ ] Logger
+* [ ] Tratamento centralizado de erros
+* [ ] Testes unitários
+
+### Resultado Esperado
+
+Base sólida para crescimento do projeto.
+
+---
+
+# v0.4.0 — Autenticação
+
+Status: Planejado
+
+### Usuários
+
+* [ ] Model User
+* [ ] CRUD User
+
+### Segurança
+
+* [ ] JWT
+* [ ] Login
+* [ ] Registro
+* [ ] Middleware de autenticação
+
+### Resultado Esperado
+
+API protegida por autenticação.
+
+---
+
+# v0.5.0 — Starter Reutilizável
+
+Status: Planejado
+
+### Automação
+
+* [ ] Gerador de módulos
+* [ ] Gerador de CRUD
+
+### Estrutura
+
+* [ ] Interfaces para repositories
+* [ ] Injeção de dependência
+
+### Resultado Esperado
+
+Capacidade de criar novos módulos rapidamente.
+
+---
+
+# v1.0.0 — Starter Production Ready
+
+Status: Futuro
+
+### Infraestrutura
+
+* [ ] Docker Compose completo
+* [ ] Ambiente Dev
+* [ ] Ambiente Produção
+
+### Segurança
+
+* [ ] Rate Limiting
+* [ ] CORS
+* [ ] Auditoria
+
+### Observabilidade
+
+* [ ] Logs estruturados
+* [ ] Métricas
+
+### Resultado Esperado
+
+Starter pronto para projetos reais.
+
+---
+
+# Backlog
+
+Ideias para avaliação futura:
+
+* Swagger/OpenAPI
+* Refresh Tokens
+* RBAC (Roles e Permissões)
+* Upload de Arquivos
+* Cache Redis
+* Filas
+* WebSockets
+* CLI de scaffolding
+* Template para Microsserviços
+* Template SaaS
+* Template Admin Panel
+
+```
+```

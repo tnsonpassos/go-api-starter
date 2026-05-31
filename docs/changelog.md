@@ -1,24 +1,94 @@
 # Changelog
 
-## v0.1.0
+Todas as mudanças relevantes deste projeto serão documentadas neste arquivo.
 
-### Added
+O formato utilizado segue o princípio:
 
-- Estrutura inicial
-- CRUD Items
-- Handler
-- Service
-- Repository
-- Configuração .env
-- Response Package
-- GitHub
+* Added (Adicionado)
+* Changed (Alterado)
+* Fixed (Corrigido)
+* Removed (Removido)
 
 ---
 
-## v0.2.0
+# v0.1.0 - 2026-05-31
 
-### Planned
+Primeira versão funcional do Go API Starter.
 
-- Docker
-- PostgreSQL
-- Persistência real
+## Added
+
+### Estrutura Base
+
+* Inicialização do módulo Go
+* Estrutura de diretórios organizada
+* Integração com Git e GitHub
+
+### API
+
+* Endpoint de Health Check
+* CRUD completo de Items
+* Rotas REST para:
+
+  * Listagem
+  * Consulta por ID
+  * Criação
+  * Atualização
+  * Remoção
+
+### Arquitetura
+
+Implementação da arquitetura:
+
+Request
+→ Handler
+→ Service
+→ Repository
+→ Data
+
+Camadas criadas:
+
+* Model
+* Handler
+* Service
+* Repository
+* Routes
+
+### Configuração
+
+* Configuração por arquivo .env
+* Carregamento centralizado de configurações
+
+### Responses
+
+* Padronização das respostas JSON
+* Estrutura única para sucesso e erro
+
+### Documentação
+
+Criação da documentação inicial:
+
+* README
+* Vision
+* Architecture
+* Roadmap
+* Decisions
+* Learning Journal
+* Glossary
+* Aprimorium
+
+## Known Limitations
+
+A versão atual ainda utiliza armazenamento em memória.
+
+Os dados são perdidos ao reiniciar a aplicação.
+
+## Next Version
+
+v0.2.0
+
+Objetivos:
+
+* Docker
+* PostgreSQL
+* Persistência real
+* Repository conectado ao banco de dados
