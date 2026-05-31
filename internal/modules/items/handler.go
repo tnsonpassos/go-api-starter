@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"go-starter/pkg/response"
+	"go-api-starter/pkg/response"
 )
 
 func ListItemsHandler(w http.ResponseWriter, r *http.Request) {

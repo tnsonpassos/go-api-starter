@@ -4,19 +4,25 @@ import (
 	"log"
 	"net/http"
 
-	"go-starter/internal/modules/items"
+	"go-api-starter/internal/config"
+	"go-api-starter/internal/modules/items"
 )
 
 func main() {
+	cfg := config.Load()
+
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("GET /health", healthHandler)
 
 	items.RegisterRoutes(mux)
 
-	log.Println("Servidor rodando em http://localhost:8080")
+	address := ":" + cfg.AppPort
 
-	err := http.ListenAndServe(":8080", mux)
+	log.Println("Ambiente:", cfg.AppEnv)
+	log.Println("Servidor rodando em http://localhost" + address)
+
+	err := http.ListenAndServe(address, mux)
 	if err != nil {
 		log.Fatal(err)
 	}
