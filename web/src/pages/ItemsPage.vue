@@ -5,6 +5,7 @@ import { getItems, createItem, deleteItem, updateItem } from '../services/api'
 const items = ref([])
 const loading = ref(true)
 const error = ref('')
+const success = ref('')
 
 const form = ref({
   name: '',
@@ -13,13 +14,23 @@ const form = ref({
 
 const editingItemId = ref(null)
 
+function clearMessages() {
+  error.value = ''
+  success.value = ''
+}
+
 async function submitForm() {
+  clearMessages()  
   try {
     if (editingItemId.value) {
       await updateItem(editingItemId.value, form.value)
     } else {
       await createItem(form.value)
     }
+
+    success.value = editingItemId.value
+        ? 'Item atualizado com sucesso'
+        : 'Item criado com sucesso' 
 
     form.value = {
       name: '',
@@ -53,18 +64,20 @@ function cancelEdit() {
 }
 
 async function removeItem(id) {
-  const confirmDelete = confirm('Deseja realmente excluir este item?')
+    clearMessages()
+    const confirmDelete = confirm('Deseja realmente excluir este item?')
 
-  if (!confirmDelete) {
-    return
-  }
+    if (!confirmDelete) {
+        return
+    }
 
-  try {
-    await deleteItem(id)
-    await loadItems()
-  } catch (err) {
-    error.value = err.message
-  }
+    try {
+        await deleteItem(id)
+        success.value = 'Item excluído com sucesso'
+        await loadItems()
+    } catch (err) {
+        error.value = err.message
+    }
 }
 
 async function loadItems() {
@@ -183,5 +196,9 @@ onMounted(() => {
       </div>
     </div>
 
+    <div v-if="success" class="alert alert-success">
+        {{ success }}
+    </div>
+    
   </div>
 </template>
