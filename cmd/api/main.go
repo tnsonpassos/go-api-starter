@@ -6,6 +6,7 @@ import (
 
 	"go-api-starter/internal/config"
 	"go-api-starter/internal/database"
+	"go-api-starter/internal/middleware"
 	"go-api-starter/internal/modules/items"
 )
 
@@ -26,7 +27,9 @@ func main() {
 	log.Println("Ambiente:", cfg.AppEnv)
 	log.Println("Servidor rodando em http://localhost" + address)
 
-	err := http.ListenAndServe(address, mux)
+	handler := middleware.CORS(mux)
+
+	err := http.ListenAndServe(address, handler)
 	if err != nil {
 		log.Fatal(err)
 	}

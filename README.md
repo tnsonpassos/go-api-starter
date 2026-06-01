@@ -45,9 +45,13 @@ curl http://localhost:8080/items
 O projeto possui atalhos para comandos comuns.
 
 make run
+
 make migrate-up
+
 make migrate-down
+
 make test-health
+
 make test-items
 
 ## Estado Atual
