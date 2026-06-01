@@ -76,7 +76,7 @@ Status: Planejado
 
 ### Banco
 
-* [ ] Sistema de Migrations
+* [x] Sistema de Migrations
 * [ ] Seed de dados
 
 ### Qualidade

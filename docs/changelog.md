@@ -99,3 +99,7 @@ Added:
 - Persistência real
 - Integração Postgres.app
 - Migration inicial
+- Migration runner em Go
+- Criação automática da tabela schema_migrations
+- Execução de migrations .up.sql
+- Controle de migrations já aplicadas
