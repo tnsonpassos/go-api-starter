@@ -53,6 +53,12 @@ func (h *Handler) CreateItemHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	validationError := ValidateItem(newItem)
+	if validationError != "" {
+		response.Error(w, http.StatusBadRequest, validationError)
+		return
+	}
+
 	createdItem, err := h.Service.CreateItem(newItem)
 	if err != nil {
 		response.Error(w, http.StatusInternalServerError, "Erro ao criar item")
@@ -74,6 +80,12 @@ func (h *Handler) UpdateItemHandler(w http.ResponseWriter, r *http.Request) {
 	err = json.NewDecoder(r.Body).Decode(&updatedItem)
 	if err != nil {
 		response.Error(w, http.StatusBadRequest, "JSON inválido")
+		return
+	}
+
+	validationError := ValidateItem(updatedItem)
+	if validationError != "" {
+		response.Error(w, http.StatusBadRequest, validationError)
 		return
 	}
 
