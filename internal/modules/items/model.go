@@ -1,15 +1,11 @@
 package items
 
-type Item struct {
-	ID          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
+import "time"
 
-var Items = []Item{
-	{
-		ID:          1,
-		Name:        "Item exemplo",
-		Description: "Primeiro item do starter",
-	},
+type Item struct {
+	ID          int       `json:"id"`
+	Name        string    `json:"name"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
 }

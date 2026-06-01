@@ -1,21 +1,31 @@
 package items
 
-func ListItems() []Item {
-	return FindAll()
+type Service struct {
+	Repository *Repository
 }
 
-func GetItem(id int) (*Item, error) {
-	return FindByID(id)
+func NewService(repository *Repository) *Service {
+	return &Service{
+		Repository: repository,
+	}
 }
 
-func CreateItem(item Item) Item {
-	return Create(item)
+func (s *Service) ListItems() ([]Item, error) {
+	return s.Repository.FindAll()
 }
 
-func UpdateItem(id int, item Item) (*Item, error) {
-	return Update(id, item)
+func (s *Service) GetItem(id int) (*Item, error) {
+	return s.Repository.FindByID(id)
 }
 
-func DeleteItem(id int) error {
-	return Delete(id)
+func (s *Service) CreateItem(item Item) (*Item, error) {
+	return s.Repository.Create(item)
+}
+
+func (s *Service) UpdateItem(id int, item Item) (*Item, error) {
+	return s.Repository.Update(id, item)
+}
+
+func (s *Service) DeleteItem(id int) error {
+	return s.Repository.Delete(id)
 }

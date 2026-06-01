@@ -84,7 +84,7 @@ Os dados são perdidos ao reiniciar a aplicação.
 
 ## Next Version
 
-v0.2.0
+v0.2.0 (em andamento)
 
 Objetivos:
 
@@ -92,3 +92,9 @@ Objetivos:
 * PostgreSQL
 * Persistência real
 * Repository conectado ao banco de dados
+
+Added:
+- PostgreSQL
+- Repository com SQL
+- Persistência real
+- Integração Postgres.app

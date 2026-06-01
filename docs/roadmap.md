@@ -45,19 +45,19 @@ Status: Em andamento
 
 * [ ] Docker Desktop
 * [ ] Docker Compose
-* [ ] PostgreSQL Container
+* [x] PostgreSQL Container
 
 ### Backend
 
-* [ ] Conexão PostgreSQL
-* [ ] Health Check do Banco
-* [ ] Repository PostgreSQL
-* [ ] Remoção do armazenamento em memória
+* [x] Conexão PostgreSQL
+* [x] Health Check do Banco
+* [x] Repository PostgreSQL
+* [x] Remoção do armazenamento em memória
 
 ### Dados
 
-* [ ] Tabela Items
-* [ ] CRUD persistente
+* [x] Tabela Items
+* [x] CRUD persistente
 
 ### Documentação
 

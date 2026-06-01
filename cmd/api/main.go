@@ -19,7 +19,7 @@ func main() {
 
 	mux.HandleFunc("GET /health", healthHandler)
 
-	items.RegisterRoutes(mux)
+	items.RegisterRoutes(mux, db)
 
 	address := ":" + cfg.AppPort
 
