@@ -5,10 +5,10 @@ export async function getItems() {
     const result = await response.json()
 
     if (!response.ok) {
-        throw new Error(result.message)
+        throw new Error(result.message || 'Erro ao buscar items')
     }
 
-    return result.data
+    return result.data || []
 }
 
 export async function createItem(item) {

@@ -99,11 +99,23 @@ onMounted(() => {
 <template>
   <div>
 
-    <div class="card mb-4">
+    <div
+        class="card mb-4"
+        :class="editingItemId ? 'border-primary' : ''"
+    >   
     <div class="card-body">
-        <h3 class="h5 mb-3">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+        <h3 class="h5 mb-0">
             {{ editingItemId ? 'Editar Item' : 'Novo Item' }}
         </h3>
+
+        <span
+            v-if="editingItemId"
+            class="badge text-bg-primary"
+        >
+            Modo edição
+        </span>
+        </div>
 
         <form @submit.prevent="submitForm">
         <div class="mb-3">
@@ -155,7 +167,7 @@ onMounted(() => {
     </div>
 
     <div v-if="error" class="alert alert-danger">
-      {{ error }}
+        {{ error }}
     </div>
 
     <div v-if="!loading && !error" class="card">
@@ -190,6 +202,11 @@ onMounted(() => {
                   Excluir
                 </button>
               </td>
+            </tr>
+            <tr v-if="items.length === 0">
+            <td colspan="4" class="text-center text-muted py-4">
+                Nenhum item cadastrado.
+            </td>
             </tr>
           </tbody>
         </table>
