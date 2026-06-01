@@ -39,7 +39,7 @@ Primeira versão funcional da arquitetura.
 
 # v0.2.0 — Persistência Real
 
-Status: Em andamento
+Status: Concluído
 
 ### Ambiente
 
@@ -77,7 +77,7 @@ Status: Planejado
 ### Banco
 
 * [x] Sistema de Migrations
-* [ ] Seed de dados
+* [x] Seed de dados
 
 ### Qualidade
 

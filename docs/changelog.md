@@ -82,24 +82,43 @@ A versão atual ainda utiliza armazenamento em memória.
 
 Os dados são perdidos ao reiniciar a aplicação.
 
+# v0.2.0 - 2026-05-31
+
+## Added
+
+- Integração com PostgreSQL
+- Repository persistente para Items
+- Migration inicial para tabela items
+- Migration runner em Go
+- Suporte a comando up
+- Suporte a comando down
+- Criação automática da tabela schema_migrations
+- Makefile com atalhos de uso
+- Validação do módulo Items
+- Respostas de erro de validação padronizadas
+
+## Changed
+
+- Repository deixou de usar armazenamento em memória
+- Handler passou a receber Service como dependência
+- Routes passou a receber conexão com banco
+- Fluxo principal passou a ser:
+  Request → Handler → Service → Repository → PostgreSQL
+
+## Known Limitations
+
+- Ainda não há autenticação
+- Ainda não há testes automatizados
+- Ainda não há paginação
+- Ainda não há Docker funcional neste ambiente
+
 ## Next Version
 
-v0.2.0 (em andamento)
+v0.3.0
 
 Objetivos:
 
-* Docker
-* PostgreSQL
-* Persistência real
-* Repository conectado ao banco de dados
-
-Added:
-- PostgreSQL
-- Repository com SQL
-- Persistência real
-- Integração Postgres.app
-- Migration inicial
-- Migration runner em Go
-- Criação automática da tabela schema_migrations
-- Execução de migrations .up.sql
-- Controle de migrations já aplicadas
+- Testes
+- Logger
+- Tratamento centralizado de erros
+- Melhorias de qualidade
