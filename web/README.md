@@ -33,6 +33,7 @@ make run
 ### Em outro terminal, rode o frontend:
 
 cd web
+
 npm run dev
 
 ### Frontend:
@@ -45,22 +46,32 @@ http://localhost:8080
 
 ## Estrutura
 
+```txt
 web/
+├── public/
 ├── src/
+│   ├── components/
 │   ├── pages/
 │   │   └── ItemsPage.vue
 │   ├── services/
 │   │   └── api.js
 │   ├── App.vue
 │   └── main.js
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
 ## Integração com Backend
 
 O frontend consome os endpoints:
 
 GET    /items
+
 POST   /items
+
 PUT    /items/:id
+
 DELETE /items/:id
 
 ## Observações

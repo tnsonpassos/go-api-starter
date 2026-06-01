@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { getItems, createItem, deleteItem, updateItem } from '../services/api'
+import ItemForm from '../components/ItemForm.vue'
+import ItemTable from '../components/ItemTable.vue'
 
 const items = ref([])
 const loading = ref(true)
@@ -19,18 +21,17 @@ function clearMessages() {
   success.value = ''
 }
 
-async function submitForm() {
-  clearMessages()  
+async function submitForm(payload) {
   try {
-    if (editingItemId.value) {
-      await updateItem(editingItemId.value, form.value)
-    } else {
-      await createItem(form.value)
-    }
+    clearMessages()
 
-    success.value = editingItemId.value
-        ? 'Item atualizado com sucesso'
-        : 'Item criado com sucesso' 
+    if (editingItemId.value) {
+      await updateItem(editingItemId.value, payload)
+      success.value = 'Item atualizado com sucesso'
+    } else {
+      await createItem(payload)
+      success.value = 'Item criado com sucesso'
+    }
 
     form.value = {
       name: '',
@@ -99,63 +100,12 @@ onMounted(() => {
 <template>
   <div>
 
-    <div
-        class="card mb-4"
-        :class="editingItemId ? 'border-primary' : ''"
-    >   
-    <div class="card-body">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-        <h3 class="h5 mb-0">
-            {{ editingItemId ? 'Editar Item' : 'Novo Item' }}
-        </h3>
-
-        <span
-            v-if="editingItemId"
-            class="badge text-bg-primary"
-        >
-            Modo edição
-        </span>
-        </div>
-
-        <form @submit.prevent="submitForm">
-        <div class="mb-3">
-            <label class="form-label">Nome</label>
-
-            <input
-            v-model="form.name"
-            class="form-control"
-            required
-            />
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Descrição</label>
-
-            <textarea
-            v-model="form.description"
-            class="form-control"
-            rows="3"
-            ></textarea>
-        </div>
-
-        <div class="d-flex gap-2">
-        <button class="btn btn-primary">
-            {{ editingItemId ? 'Atualizar' : 'Salvar' }}
-        </button>
-
-        <button
-            v-if="editingItemId"
-            type="button"
-            class="btn btn-outline-secondary"
-            @click="cancelEdit"
-        >
-            Cancelar
-        </button>
-        </div>
-
-        </form>
-    </div>
-    </div>
+    <ItemForm
+    :item="form"
+    :editing="!!editingItemId"
+    @submit="submitForm"
+    @cancel="cancelEdit"
+    />
 
     <div class="mb-4">
       <h2 class="fw-bold">Items</h2>
@@ -170,48 +120,11 @@ onMounted(() => {
         {{ error }}
     </div>
 
-    <div v-if="!loading && !error" class="card">
-      <div class="card-body">
-        <table class="table table-striped mb-0">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nome</th>
-              <th>Descrição</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr v-for="item in items" :key="item.id">
-              <td>{{ item.id }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.description }}</td>
-              <td>
-                <button
-                    class="btn btn-sm btn-outline-primary me-2"
-                    @click="editItem(item)"
-                >
-                    Editar
-                </button>   
-
-                <button
-                  class="btn btn-sm btn-danger"
-                  @click="removeItem(item.id)"
-                >
-                  Excluir
-                </button>
-              </td>
-            </tr>
-            <tr v-if="items.length === 0">
-            <td colspan="4" class="text-center text-muted py-4">
-                Nenhum item cadastrado.
-            </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <ItemTable
+      :items="items"
+      @edit="editItem"
+      @delete="removeItem"
+    />
 
     <div v-if="success" class="alert alert-success">
         {{ success }}
