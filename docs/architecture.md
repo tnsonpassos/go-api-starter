@@ -61,3 +61,18 @@ internal/modules/items
 pkg/response
 
 * Padronização das respostas da API
+
+## Banco de Dados
+
+As alterações estruturais do banco são versionadas através de migrations.
+
+Estrutura:
+
+migrations/
+├── 001_create_items.up.sql
+└── 001_create_items.down.sql
+
+Convenções:
+
+- up = aplica alteração
+- down = desfaz alteração
