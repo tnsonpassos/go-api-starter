@@ -32,3 +32,11 @@ func Error(w http.ResponseWriter, status int, message string) {
 		Message: message,
 	})
 }
+
+func ValidationError(w http.ResponseWriter, message string, errors any) {
+	JSON(w, http.StatusBadRequest, APIResponse{
+		Success: false,
+		Message: message,
+		Error:   errors,
+	})
+}

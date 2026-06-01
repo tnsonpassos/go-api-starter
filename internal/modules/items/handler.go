@@ -53,9 +53,9 @@ func (h *Handler) CreateItemHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validationError := ValidateItem(newItem)
-	if validationError != "" {
-		response.Error(w, http.StatusBadRequest, validationError)
+	validationErrors := ValidateItem(newItem)
+	if len(validationErrors) > 0 {
+		response.ValidationError(w, "Erro de validação", validationErrors)
 		return
 	}
 
@@ -83,9 +83,9 @@ func (h *Handler) UpdateItemHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	validationError := ValidateItem(updatedItem)
-	if validationError != "" {
-		response.Error(w, http.StatusBadRequest, validationError)
+	validationErrors := ValidateItem(updatedItem)
+	if len(validationErrors) > 0 {
+		response.ValidationError(w, "Erro de validação", validationErrors)
 		return
 	}
 
