@@ -98,3 +98,4 @@ Added:
 - Repository com SQL
 - Persistência real
 - Integração Postgres.app
+- Migration inicial
