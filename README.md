@@ -18,6 +18,28 @@ O projeto evoluirá gradualmente para incluir:
 * Controle de permissões
 * Geração automática de módulos
 
+## Comandos
+
+### Rodar API
+
+go run cmd/api/main.go
+
+### Migrations
+
+- Rodar todas as migrations pendentes
+go run cmd/migrate/main.go up
+
+- Reverter a última migration
+go run cmd/migrate/main.go down
+
+### Testes
+
+- Testar health check
+curl http://localhost:8080/health
+
+- Listar items
+curl http://localhost:8080/items
+
 ## Estado Atual
 
 ### Concluído

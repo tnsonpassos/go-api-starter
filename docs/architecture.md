@@ -76,3 +76,16 @@ Convenções:
 
 - up = aplica alteração
 - down = desfaz alteração
+
+## Migration Runner
+
+O projeto possui um comando separado para gerenciar alterações no banco.
+
+Local:
+
+cmd/migrate/main.go
+
+Comandos:
+
+go run cmd/migrate/main.go up
+go run cmd/migrate/main.go down
