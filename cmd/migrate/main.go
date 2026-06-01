@@ -28,8 +28,10 @@ func main() {
 	switch direction {
 	case "up":
 		runUpMigrations(db)
+	case "down":
+		runDownMigration(db)
 	default:
-		log.Fatalf("Comando inválido: %s. Use: up", direction)
+		log.Fatalf("Comando inválido: %s. Use: up ou down", direction)
 	}
 }
 
@@ -123,4 +125,65 @@ func getMigrationVersion(path string) string {
 	version := strings.TrimSuffix(filename, ".up.sql")
 
 	return version
+}
+
+func runDownMigration(db *sql.DB) {
+	version, err := getLastAppliedMigration(db)
+	if err != nil {
+		log.Fatal("Erro ao buscar última migration:", err)
+	}
+
+	if version == "" {
+		log.Println("Nenhuma migration aplicada para reverter")
+		return
+	}
+
+	file := filepath.Join("migrations", version+".down.sql")
+
+	sqlContent, err := os.ReadFile(file)
+	if err != nil {
+		log.Fatalf("Erro ao ler migration down %s: %v", version, err)
+	}
+
+	_, err = db.Exec(string(sqlContent))
+	if err != nil {
+		log.Fatalf("Erro ao executar migration down %s: %v", version, err)
+	}
+
+	err = unregisterMigration(db, version)
+	if err != nil {
+		log.Fatalf("Erro ao remover registro da migration %s: %v", version, err)
+	}
+
+	log.Println("Migration revertida:", version)
+}
+
+func getLastAppliedMigration(db *sql.DB) (string, error) {
+	var version string
+
+	err := db.QueryRow(`
+		SELECT version
+		FROM schema_migrations
+		ORDER BY applied_at DESC
+		LIMIT 1
+	`).Scan(&version)
+
+	if err == sql.ErrNoRows {
+		return "", nil
+	}
+
+	if err != nil {
+		return "", err
+	}
+
+	return version, nil
+}
+
+func unregisterMigration(db *sql.DB, version string) error {
+	_, err := db.Exec(`
+		DELETE FROM schema_migrations
+		WHERE version = $1
+	`, version)
+
+	return err
 }
