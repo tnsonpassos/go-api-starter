@@ -1,5 +1,72 @@
-# Vue 3 + Vite
+# Go API Starter — Frontend
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Frontend criado com Vue 3, Vite e Bootstrap para consumir a API Go API Starter.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Stack
+
+- Vue 3
+- Vite
+- Bootstrap
+- Fetch API
+
+## Objetivo
+
+Criar uma interface visual para testar e consumir o CRUD de Items da API Go.
+
+## Funcionalidades
+
+- [x] Listar Items
+- [x] Criar Item
+- [x] Editar Item
+- [x] Excluir Item
+- [x] Mensagens de sucesso
+- [x] Mensagens de erro
+- [x] Estado de edição
+- [x] Estado de lista vazia
+
+## Como rodar
+
+### Na raiz do projeto, rode o backend:
+
+make run
+
+### Em outro terminal, rode o frontend:
+
+cd web
+npm run dev
+
+### Frontend:
+
+http://localhost:5173
+
+### Backend:
+
+http://localhost:8080
+
+## Estrutura
+
+web/
+├── src/
+│   ├── pages/
+│   │   └── ItemsPage.vue
+│   ├── services/
+│   │   └── api.js
+│   ├── App.vue
+│   └── main.js
+
+## Integração com Backend
+
+O frontend consome os endpoints:
+
+GET    /items
+POST   /items
+PUT    /items/:id
+DELETE /items/:id
+
+## Observações
+
+A API precisa estar rodando antes do frontend consumir os dados.
+
+O backend precisa liberar CORS para:
+
+http://localhost:5173
