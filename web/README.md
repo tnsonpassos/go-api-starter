@@ -28,13 +28,16 @@ Criar uma interface visual para testar e consumir o CRUD de Items da API Go.
 
 ### Na raiz do projeto, rode o backend:
 
+```bash
 make run
+```
 
 ### Em outro terminal, rode o frontend:
 
+```bash
 cd web
-
 npm run dev
+```
 
 ### Frontend:
 

@@ -22,37 +22,61 @@ O projeto evoluirá gradualmente para incluir:
 
 ### Rodar API
 
+```bash
 go run cmd/api/main.go
+```
 
 ### Migrations
 
 - Rodar todas as migrations pendentes
+
+```bash
 go run cmd/migrate/main.go up
+```
 
 - Reverter a última migration
+
+```bash
 go run cmd/migrate/main.go down
+```
 
 ### Testes
 
 - Testar health check
+
+```bash
 curl http://localhost:8080/health
+```
 
 - Listar items
+
+```bash
 curl http://localhost:8080/items
+```
 
 ## Makefile
 
 O projeto possui atalhos para comandos comuns.
 
+```bash
 make run
+```
 
+```bash
 make migrate-up
+```
 
+```bash
 make migrate-down
+```
 
+```bash
 make test-health
+```
 
+```bash
 make test-items
+```
 
 ## Estado Atual
 
