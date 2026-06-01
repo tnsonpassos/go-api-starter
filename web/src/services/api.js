@@ -42,3 +42,21 @@ export async function deleteItem(id) {
 
     return result.data
 }
+
+export async function updateItem(id, item) {
+    const response = await fetch(`${API_URL}/items/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+    })
+
+    const result = await response.json()
+
+    if (!response.ok) {
+        throw result
+    }
+
+    return result.data
+}

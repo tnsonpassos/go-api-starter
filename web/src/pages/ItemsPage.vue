@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { getItems, createItem, deleteItem } from '../services/api'
+import { getItems, createItem, deleteItem, updateItem } from '../services/api'
 
 const items = ref([])
 const loading = ref(true)
@@ -11,18 +11,44 @@ const form = ref({
   description: '',
 })
 
+const editingItemId = ref(null)
+
 async function submitForm() {
   try {
-    await createItem(form.value)
+    if (editingItemId.value) {
+      await updateItem(editingItemId.value, form.value)
+    } else {
+      await createItem(form.value)
+    }
 
     form.value = {
       name: '',
       description: '',
     }
 
+    editingItemId.value = null
+
     await loadItems()
   } catch (err) {
     console.error(err)
+  }
+}
+
+function editItem(item) {
+  editingItemId.value = item.id
+
+  form.value = {
+    name: item.name,
+    description: item.description,
+  }
+}
+
+function cancelEdit() {
+  editingItemId.value = null
+
+  form.value = {
+    name: '',
+    description: '',
   }
 }
 
@@ -62,7 +88,9 @@ onMounted(() => {
 
     <div class="card mb-4">
     <div class="card-body">
-        <h3 class="h5 mb-3">Novo Item</h3>
+        <h3 class="h5 mb-3">
+            {{ editingItemId ? 'Editar Item' : 'Novo Item' }}
+        </h3>
 
         <form @submit.prevent="submitForm">
         <div class="mb-3">
@@ -85,9 +113,21 @@ onMounted(() => {
             ></textarea>
         </div>
 
+        <div class="d-flex gap-2">
         <button class="btn btn-primary">
-            Salvar
+            {{ editingItemId ? 'Atualizar' : 'Salvar' }}
         </button>
+
+        <button
+            v-if="editingItemId"
+            type="button"
+            class="btn btn-outline-secondary"
+            @click="cancelEdit"
+        >
+            Cancelar
+        </button>
+        </div>
+
         </form>
     </div>
     </div>
@@ -123,6 +163,13 @@ onMounted(() => {
               <td>{{ item.name }}</td>
               <td>{{ item.description }}</td>
               <td>
+                <button
+                    class="btn btn-sm btn-outline-primary me-2"
+                    @click="editItem(item)"
+                >
+                    Editar
+                </button>   
+
                 <button
                   class="btn btn-sm btn-danger"
                   @click="removeItem(item.id)"
